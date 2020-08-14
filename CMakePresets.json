@@ -1,0 +1,251 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "_root-config",
+      "hidden": true,
+      "warnings": {
+        "dev": false
+      },
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "installDir": "${sourceDir}/stage",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_C_STANDARD": "99",
+        "CMAKE_C_STANDARD_REQUIRED": "ON",
+        "CMAKE_C_EXTENSIONS": "ON",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "_sqlite-config",
+      "hidden": true,
+      "cacheVariables": {
+        "SQLITE_BUILD_SHELL": "ON",
+        "SQLITE_DEFAULT_MEMSTATUS": "1",
+        "SQLITE_DEFAULT_SYNCHRONOUS": "2",
+        "SQLITE_DEFAULT_WAL_SYNCHRONOUS": "1",
+        "SQLITE_DQS": "0",
+        "SQLITE_ENABLE_API_ARMOR": "ON",
+        "SQLITE_ENABLE_COLUMN_METADATA": "ON",
+        "SQLITE_ENABLE_DBSTAT_VTAB": "ON",
+        "SQLITE_ENABLE_DESERIALIZE": "ON",
+        "SQLITE_ENABLE_EXPLAIN_COMMENTS": "ON",
+        "SQLITE_ENABLE_FTS5": "ON",
+        "SQLITE_ENABLE_GEOPOLY": "ON",
+        "SQLITE_ENABLE_ICU": "OFF",
+        "SQLITE_ENABLE_JSON1": "ON",
+        "SQLITE_ENABLE_NORMALIZE": "ON",
+        "SQLITE_ENABLE_PREUPDATE_HOOK": "ON",
+        "SQLITE_ENABLE_RBU": "ON",
+        "SQLITE_ENABLE_RTREE": "ON",
+        "SQLITE_ENABLE_SESSION": "ON",
+        "SQLITE_ENABLE_STMTVTAB": "ON",
+        "SQLITE_LIKE_DOESNT_MATCH_BLOBS": "ON",
+        "SQLITE_MAX_EXPR_DEPTH": "0",
+        "SQLITE_OMIT_DEPRECATED": "ON",
+        "SQLITE_THREADSAFE": "1"
+      }
+    },
+    {
+      "name": "_debug-base",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "_release-base",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "_static-base",
+      "hidden": true,
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": "OFF"
+      }
+    },
+    {
+      "name": "_shared-base",
+      "hidden": true,
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": "ON"
+      }
+    },
+    {
+      "name": "debug-static",
+      "displayName": "Debug build with static libraries",
+      "inherits": [
+        "_root-config",
+        "_sqlite-config",
+        "_debug-base",
+        "_static-base"
+      ]
+    },
+    {
+      "name": "debug-shared",
+      "displayName": "Debug build with shared libraries",
+      "inherits": [
+        "_root-config",
+        "_sqlite-config",
+        "_debug-base",
+        "_shared-base"
+      ]
+    },
+    {
+      "name": "release-static",
+      "displayName": "Release build with static libraries",
+      "inherits": [
+        "_root-config",
+        "_sqlite-config",
+        "_release-base",
+        "_static-base"
+      ]
+    },
+    {
+      "name": "release-shared",
+      "displayName": "Release build with shared libraries",
+      "inherits": [
+        "_root-config",
+        "_sqlite-config",
+        "_release-base",
+        "_shared-base"
+      ]
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "_root-build",
+      "hidden": true,
+      "jobs": 0,
+      "targets": "all"
+    },
+    {
+      "name": "debug-static",
+      "configurePreset": "debug-static",
+      "inherits": "_root-build"
+    },
+    {
+      "name": "debug-shared",
+      "configurePreset": "debug-shared",
+      "inherits": "_root-build"
+    },
+    {
+      "name": "release-static",
+      "configurePreset": "release-static",
+      "inherits": "_root-build"
+    },
+    {
+      "name": "release-shared",
+      "configurePreset": "release-shared",
+      "inherits": "_root-build"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "_root-test",
+      "hidden": true,
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": false
+      }
+    },
+    {
+      "name": "debug-static",
+      "configurePreset": "debug-static",
+      "inherits": "_root-test"
+    },
+    {
+      "name": "debug-shared",
+      "configurePreset": "debug-shared",
+      "inherits": "_root-test"
+    },
+    {
+      "name": "release-static",
+      "configurePreset": "release-static",
+      "inherits": "_root-test"
+    },
+    {
+      "name": "release-shared",
+      "configurePreset": "release-shared",
+      "inherits": "_root-test"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "debug-static",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "debug-static"
+        },
+        {
+          "type": "build",
+          "name": "debug-static"
+        },
+        {
+          "type": "test",
+          "name": "debug-static"
+        }
+      ]
+    },
+    {
+      "name": "debug-shared",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "debug-shared"
+        },
+        {
+          "type": "build",
+          "name": "debug-shared"
+        },
+        {
+          "type": "test",
+          "name": "debug-shared"
+        }
+      ]
+    },
+    {
+      "name": "release-static",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "release-static"
+        },
+        {
+          "type": "build",
+          "name": "release-static"
+        },
+        {
+          "type": "test",
+          "name": "release-static"
+        }
+      ]
+    },
+    {
+      "name": "release-shared",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "release-shared"
+        },
+        {
+          "type": "build",
+          "name": "release-shared"
+        },
+        {
+          "type": "test",
+          "name": "release-shared"
+        }
+      ]
+    }
+  ]
+}

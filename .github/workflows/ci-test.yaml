@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2020 AlgorIT Software Consultancy <https://github.com/algoritnl>
+# SPDX-License-Identifier: CC0-1.0
+
+name: CI Test
+
+on:
+  push:
+    branches: [main, develop]
+    tags: ['v*']
+
+jobs:
+  sha3sum:
+    runs-on: ubuntu-26.04
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Verify SHA3-256 checksum
+        working-directory: ./source
+        run: cksum -c sqlite3.sha3sum
+
+  build:
+    needs: sha3sum
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        preset: [debug-static, debug-shared, release-static, release-shared]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install optional development files (Linux)
+        if: ${{ runner.os == 'Linux' }}
+        run: |
+          sudo apt-get update &&
+          sudo apt-get install -y libreadline-dev
+
+      - name: Install optional development files (macOS)
+        if: ${{ runner.os == 'macOS' }}
+        run: brew link --force readline
+
+      - name: Run CMake workflow
+        run: cmake --workflow --preset=${{ matrix.preset }}
