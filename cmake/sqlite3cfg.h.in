@@ -1,0 +1,49 @@
+/*
+** The author disclaims copyright to this source code.  In place of
+** a legal notice, here is a blessing:
+**
+**    May you do good and not evil.
+**    May you find forgiveness for yourself and forgive others.
+**    May you share freely, never taking more than you give.
+**
+*************************************************************************
+** This header file lists all the compile-time options that were
+** used to build the SQLite library.
+*/
+#ifndef SQLITE3CFG_H
+#define SQLITE3CFG_H
+
+#define SQLITE_DEFAULT_MEMSTATUS @SQLITE_DEFAULT_MEMSTATUS@
+#define SQLITE_DEFAULT_SYNCHRONOUS @SQLITE_DEFAULT_SYNCHRONOUS@
+#define SQLITE_DEFAULT_WAL_SYNCHRONOUS @SQLITE_DEFAULT_WAL_SYNCHRONOUS@
+#define SQLITE_DQS @SQLITE_DQS@
+#cmakedefine SQLITE_ENABLE_API_ARMOR
+#cmakedefine SQLITE_ENABLE_COLUMN_METADATA
+#cmakedefine SQLITE_ENABLE_DBSTAT_VTAB
+#cmakedefine SQLITE_ENABLE_DESERIALIZE
+#cmakedefine SQLITE_ENABLE_EXPLAIN_COMMENTS
+#cmakedefine SQLITE_ENABLE_FTS3
+#cmakedefine SQLITE_ENABLE_FTS3_PARENTHESIS
+#cmakedefine SQLITE_ENABLE_FTS4
+#cmakedefine SQLITE_ENABLE_FTS5
+#cmakedefine SQLITE_ENABLE_GEOPOLY
+#cmakedefine SQLITE_ENABLE_ICU
+#cmakedefine SQLITE_ENABLE_JSON1
+#cmakedefine SQLITE_ENABLE_NORMALIZE
+#cmakedefine SQLITE_ENABLE_PREUPDATE_HOOK
+#cmakedefine SQLITE_ENABLE_RBU
+#cmakedefine SQLITE_ENABLE_RTREE
+#cmakedefine SQLITE_ENABLE_SESSION
+#cmakedefine SQLITE_ENABLE_STMTVTAB
+#cmakedefine SQLITE_LIKE_DOESNT_MATCH_BLOBS
+#cmakedefine SQLITE_OMIT_AUTOINIT
+#cmakedefine SQLITE_OMIT_COMPILEOPTION_DIAGS
+#cmakedefine SQLITE_OMIT_DECLTYPE
+#cmakedefine SQLITE_OMIT_DEPRECATED
+#cmakedefine SQLITE_OMIT_LOAD_EXTENSION
+#cmakedefine SQLITE_OMIT_PROGRESS_CALLBACK
+#cmakedefine SQLITE_OMIT_SHARED_CACHE
+#define SQLITE_THREADSAFE @SQLITE_THREADSAFE@
+#cmakedefine SQLITE_USE_ALLOCA
+
+#endif /* SQLITE3CFG_H */
