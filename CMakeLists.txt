@@ -32,6 +32,7 @@ endif()
 
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/MultipleChoice.cmake")
 
+# gersemi: off
 option(SQLITE_BUILD_SHELL "Build the SQLite3 interactive shell." ${SQLite3_IS_TOP_LEVEL})
 option(SQLITE_ENABLE_API_ARMOR "This option activates extra code that attempts to detect misuse of the SQLite API." OFF)
 option(SQLITE_ENABLE_COLUMN_METADATA "Enable some extra APIs that are required by some common systems, including Ruby-on-Rails." OFF)
@@ -78,6 +79,7 @@ endif()
 if(SQLITE_ENABLE_SESSION AND NOT SQLITE_ENABLE_PREUPDATE_HOOK)
     message(SEND_ERROR "Option SQLITE_ENABLE_SESSION requires option SQLITE_ENABLE_PREUPDATE_HOOK.")
 endif()
+# gersemi: on
 
 # -- External Dependencies -----------------------------------------------------
 

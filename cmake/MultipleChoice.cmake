@@ -1,5 +1,6 @@
 # SPDX-FileCopyrightText: 2020 AlgorIT Software Consultancy <https://github.com/algoritnl>
 # SPDX-License-Identifier: CC0-1.0
+# gersemi: off
 
 include_guard(GLOBAL)
 
