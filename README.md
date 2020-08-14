@@ -5,6 +5,7 @@ SPDX-FileCopyrightText: 2020 AlgorIT Software Consultancy <https://github.com/al
 SPDX-License-Identifier: CC0-1.0
 -->
 
+[![CI Test](https://github.com/algoritnl/sqlite-cmake/actions/workflows/ci-test.yaml/badge.svg)](https://github.com/algoritnl/sqlite-cmake/actions/workflows/ci-test.yaml)
 ![CMake 3.16...4.3+](https://img.shields.io/badge/CMake-3.16...4.3%2B-blue?logo=cmake)
 
 A modern CMake build system to build, install, and integrate the official SQLite Amalgamation into C/C++ projects.
