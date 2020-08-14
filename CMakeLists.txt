@@ -31,6 +31,7 @@ endif()
 
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/multiple-choice.cmake")
 
+# gersemi: off
 option(BUILD_TESTING "Build the testing tree." ${sqlite_IS_TOP_LEVEL})
 
 option(SQLITE_BUILD_SHELL "Build the SQLite3 interactive shell." ${sqlite_IS_TOP_LEVEL})
@@ -81,6 +82,7 @@ endif()
 if(SQLITE_ENABLE_SESSION AND NOT SQLITE_ENABLE_PREUPDATE_HOOK)
     message(SEND_ERROR "Option SQLITE_ENABLE_SESSION requires option SQLITE_ENABLE_PREUPDATE_HOOK.")
 endif()
+# gersemi: on
 
 # -- External Dependencies -----------------------------------------------------
 

@@ -6,6 +6,7 @@ SPDX-License-Identifier: CC0-1.0
 -->
 
 [![REUSE status](https://api.reuse.software/badge/github.com/algoritnl/sqlite-cmake)](https://api.reuse.software/info/github.com/algoritnl/sqlite-cmake)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/algoritnl/sqlite-cmake/main.svg)](https://results.pre-commit.ci/latest/github/algoritnl/sqlite-cmake/main)
 [![CI Test](https://github.com/algoritnl/sqlite-cmake/actions/workflows/ci-test.yaml/badge.svg)](https://github.com/algoritnl/sqlite-cmake/actions/workflows/ci-test.yaml)
 ![CMake 3.16...4.4+](https://img.shields.io/badge/CMake-3.16...4.4%2B-blue?logo=cmake)
 
