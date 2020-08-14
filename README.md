@@ -5,6 +5,7 @@ SPDX-FileCopyrightText: 2020 AlgorIT Software Consultancy <https://github.com/al
 SPDX-License-Identifier: CC0-1.0
 -->
 
+[![REUSE status](https://api.reuse.software/badge/github.com/algoritnl/sqlite-cmake)](https://api.reuse.software/info/github.com/algoritnl/sqlite-cmake)
 [![CI Test](https://github.com/algoritnl/sqlite-cmake/actions/workflows/ci-test.yaml/badge.svg)](https://github.com/algoritnl/sqlite-cmake/actions/workflows/ci-test.yaml)
 ![CMake 3.16...4.4+](https://img.shields.io/badge/CMake-3.16...4.4%2B-blue?logo=cmake)
 
@@ -34,6 +35,8 @@ Other supported integrations include `FetchContent`  and `add_subdirectory`.
 This repository uses a dual-license structure:
 * The CMake build configurations and tools are dedicated to the public domain under **CC0-1.0**.
 * The SQLite source code files in the `source/` directory are licensed under the official **SQLite Blessing** (`blessing`).
+
+This project is fully REUSE compliant.
 
 ## Legal Disclaimer
 
