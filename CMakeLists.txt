@@ -45,6 +45,7 @@ option(SQLITE_ENABLE_FTS4 "Enable versions 3 and 4 of the full-text search engin
 option(SQLITE_ENABLE_FTS5 "Enable version 5 of the full-text search engine." OFF)
 option(SQLITE_ENABLE_GEOPOLY "Enable the Geopoly extension." OFF)
 option(SQLITE_ENABLE_ICU "Enable the ICU (International Components for Unicode) extension." OFF)
+option(SQLITE_ENABLE_MATH_FUNCTIONS "Enable the built-in SQL math functions." ON)
 option(SQLITE_ENABLE_JSON1 "Enable the JSON SQL functions." OFF)
 option(SQLITE_ENABLE_NORMALIZE "Enable the sqlite3_normalized_sql() API." OFF)
 option(SQLITE_ENABLE_PREUPDATE_HOOK "Enable the pre-update hook feature." OFF)
@@ -217,6 +218,7 @@ target_compile_definitions(
         "$<$<BOOL:${SQLITE_ENABLE_FTS5}>:SQLITE_ENABLE_FTS5>"
         "$<$<BOOL:${SQLITE_ENABLE_GEOPOLY}>:SQLITE_ENABLE_GEOPOLY>"
         "$<$<BOOL:${SQLITE_ENABLE_ICU}>:SQLITE_ENABLE_ICU>"
+        "$<$<BOOL:${SQLITE_ENABLE_MATH_FUNCTIONS}>:SQLITE_ENABLE_MATH_FUNCTIONS>"
         "$<$<BOOL:${SQLITE_ENABLE_JSON1}>:SQLITE_ENABLE_JSON1>"
         "$<$<BOOL:${SQLITE_ENABLE_NORMALIZE}>:SQLITE_ENABLE_NORMALIZE>"
         "$<$<BOOL:${SQLITE_ENABLE_PREUPDATE_HOOK}>:SQLITE_ENABLE_PREUPDATE_HOOK>"
