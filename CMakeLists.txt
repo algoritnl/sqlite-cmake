@@ -37,7 +37,6 @@ option(SQLITE_BUILD_SHELL "Build the SQLite3 interactive shell." ${SQLite3_IS_TO
 option(SQLITE_ENABLE_API_ARMOR "This option activates extra code that attempts to detect misuse of the SQLite API." OFF)
 option(SQLITE_ENABLE_COLUMN_METADATA "Enable some extra APIs that are required by some common systems, including Ruby-on-Rails." OFF)
 option(SQLITE_ENABLE_DBSTAT_VTAB "This option enables the dbstat virtual table." OFF)
-option(SQLITE_ENABLE_DESERIALIZE "This option enables the sqlite3_serialize() and sqlite3_deserialize() interfaces." OFF)
 option(SQLITE_ENABLE_EXPLAIN_COMMENTS "This option adds extra logic to SQLite that inserts comment text into the output of EXPLAIN." OFF)
 option(SQLITE_ENABLE_FTS3 "Enable version 3 of the full-text search engine." OFF)
 option(SQLITE_ENABLE_FTS3_PARENTHESIS "Enable operators AND and NOT and allow nested parentheses." OFF)
@@ -58,6 +57,7 @@ option(SQLITE_OMIT_AUTOINIT "Omit calling sqlite3_initialize() automatically. Th
 option(SQLITE_OMIT_COMPILEOPTION_DIAGS "Omit compile option interfaces." OFF)
 option(SQLITE_OMIT_DECLTYPE "Omit the ability to return the declared type of columns from queries." OFF)
 option(SQLITE_OMIT_DEPRECATED "Omit deprecated interfaces and features." OFF)
+option(SQLITE_OMIT_DESERIALIZE "Omit sqlite3_serialize() and sqlite3_deserialize() interfaces." OFF)
 option(SQLITE_OMIT_LOAD_EXTENSION "Omit the extension loading mechanism." OFF)
 option(SQLITE_OMIT_PROGRESS_CALLBACK "Omit the capability to issue progress callbacks." OFF)
 option(SQLITE_OMIT_SHARED_CACHE "Omit support for shared-cache mode." OFF)
@@ -210,7 +210,6 @@ target_compile_definitions(
         "$<$<BOOL:${SQLITE_ENABLE_API_ARMOR}>:SQLITE_ENABLE_API_ARMOR>"
         "$<$<BOOL:${SQLITE_ENABLE_COLUMN_METADATA}>:SQLITE_ENABLE_COLUMN_METADATA>"
         "$<$<BOOL:${SQLITE_ENABLE_DBSTAT_VTAB}>:SQLITE_ENABLE_DBSTAT_VTAB>"
-        "$<$<BOOL:${SQLITE_ENABLE_DESERIALIZE}>:SQLITE_ENABLE_DESERIALIZE>"
         "$<$<BOOL:${SQLITE_ENABLE_EXPLAIN_COMMENTS}>:SQLITE_ENABLE_EXPLAIN_COMMENTS>"
         "$<$<BOOL:${SQLITE_ENABLE_FTS3}>:SQLITE_ENABLE_FTS3>"
         "$<$<BOOL:${SQLITE_ENABLE_FTS3_PARENTHESIS}>:SQLITE_ENABLE_FTS3_PARENTHESIS>"
@@ -231,6 +230,7 @@ target_compile_definitions(
         "$<$<BOOL:${SQLITE_OMIT_COMPILEOPTION_DIAGS}>:SQLITE_OMIT_COMPILEOPTION_DIAGS>"
         "$<$<BOOL:${SQLITE_OMIT_DECLTYPE}>:SQLITE_OMIT_DECLTYPE>"
         "$<$<BOOL:${SQLITE_OMIT_DEPRECATED}>:SQLITE_OMIT_DEPRECATED>"
+        "$<$<BOOL:${SQLITE_OMIT_DESERIALIZE}>:SQLITE_OMIT_DESERIALIZE>"
         "$<$<BOOL:${SQLITE_OMIT_LOAD_EXTENSION}>:SQLITE_OMIT_LOAD_EXTENSION>"
         "$<$<BOOL:${SQLITE_OMIT_PROGRESS_CALLBACK}>:SQLITE_OMIT_PROGRESS_CALLBACK>"
         "$<$<BOOL:${SQLITE_OMIT_SHARED_CACHE}>:SQLITE_OMIT_SHARED_CACHE>"
@@ -296,9 +296,9 @@ if(SQLITE_BUILD_SHELL)
     target_compile_definitions(
         sqlite3.shell
         PRIVATE
-            "$<$<BOOL:${SQLITE_ENABLE_DESERIALIZE}>:SQLITE_ENABLE_DESERIALIZE>"
             "$<$<BOOL:${SQLITE_ENABLE_NORMALIZE}>:SQLITE_ENABLE_NORMALIZE>"
             "$<$<BOOL:${SQLITE_ENABLE_SESSION}>:SQLITE_ENABLE_SESSION>"
+            "$<$<BOOL:${SQLITE_OMIT_DESERIALIZE}>:SQLITE_OMIT_DESERIALIZE>"
             "$<$<BOOL:${SQLITE_OMIT_LOAD_EXTENSION}>:SQLITE_OMIT_LOAD_EXTENSION>"
     )
 
