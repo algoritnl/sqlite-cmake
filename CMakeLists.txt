@@ -72,8 +72,12 @@ multiple_choice(SQLITE_DEFAULT_WAL_SYNCHRONOUS HELP "Determine the default value
 multiple_choice(SQLITE_DQS HELP "Enable DQS: 0 = None (recommended); 1 = DML; 2 = DDL; 3 = Both (default)." VALID_VALUES 0 1 2 3 DEFAULT 3 DEFAULT_ON_ERROR)
 multiple_choice(SQLITE_THREADSAFE HELP "Select the thread model: 0 = single-threaded; 1 = serialized (default); 2 = multi-threaded." VALID_VALUES 0 1 2 DEFAULT 1 FATAL_ERROR)
 
+set(SQLITE_MAX_ALLOCATION_SIZE -1 CACHE STRING "Set an upper bound on the size of memory allocations.")
 set(SQLITE_MAX_EXPR_DEPTH -1 CACHE STRING "Set the maximum expression tree depth.")
 
+if(NOT SQLITE_MAX_ALLOCATION_SIZE GREATER_EQUAL -1)
+    message(SEND_ERROR "Configuration SQLITE_MAX_ALLOCATION_SIZE=${SQLITE_MAX_ALLOCATION_SIZE} is not valid.")
+endif()
 if(NOT SQLITE_MAX_EXPR_DEPTH GREATER_EQUAL -1)
     message(SEND_ERROR "Configuration SQLITE_MAX_EXPR_DEPTH=${SQLITE_MAX_EXPR_DEPTH} is not valid.")
 endif()
@@ -211,6 +215,7 @@ target_compile_definitions(
         "SQLITE_DEFAULT_WAL_SYNCHRONOUS=${SQLITE_DEFAULT_WAL_SYNCHRONOUS}"
         "SQLITE_DQS=${SQLITE_DQS}"
         "SQLITE_THREADSAFE=${SQLITE_THREADSAFE}"
+        "$<$<NOT:$<STREQUAL:${SQLITE_MAX_ALLOCATION_SIZE},-1>>:SQLITE_MAX_ALLOCATION_SIZE=${SQLITE_MAX_ALLOCATION_SIZE}>"
         "$<$<NOT:$<STREQUAL:${SQLITE_MAX_EXPR_DEPTH},-1>>:SQLITE_MAX_EXPR_DEPTH=${SQLITE_MAX_EXPR_DEPTH}>"
         "$<$<BOOL:${SQLITE_ENABLE_API_ARMOR}>:SQLITE_ENABLE_API_ARMOR>"
         "$<$<BOOL:${SQLITE_ENABLE_COLUMN_METADATA}>:SQLITE_ENABLE_COLUMN_METADATA>"
