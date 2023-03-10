@@ -137,6 +137,8 @@ check_symbol_exists(gmtime_r time.h HAVE_GMTIME_R)
 check_symbol_exists(isnan math.h HAVE_ISNAN)
 check_symbol_exists(localtime_r time.h HAVE_LOCALTIME_R)
 check_symbol_exists(localtime_s time.h HAVE_LOCALTIME_S)
+check_symbol_exists(log2 math.h HAVE_LOG2)
+check_symbol_exists(log10 math.h HAVE_LOG10)
 check_symbol_exists(lstat "fcntl.h;sys/stat.h" HAVE_LSTAT)
 check_symbol_exists(posix_fallocate fcntl.h HAVE_POSIX_FALLOCATE)
 check_symbol_exists(pread unistd.h HAVE_PREAD)
@@ -255,6 +257,8 @@ target_compile_definitions(
         "$<$<BOOL:${HAVE_ISNAN}>:HAVE_ISNAN>"
         "$<$<BOOL:${HAVE_LOCALTIME_R}>:HAVE_LOCALTIME_R>"
         "$<$<BOOL:${HAVE_LOCALTIME_S}>:HAVE_LOCALTIME_S>"
+        "HAVE_LOG2=$<BOOL:${HAVE_LOG2}>"
+        "HAVE_LOG10=$<BOOL:${HAVE_LOG10}>"
         "$<$<BOOL:${HAVE_LSTAT}>:HAVE_LSTAT>"
         "$<$<BOOL:${HAVE_POSIX_FALLOCATE}>:HAVE_POSIX_FALLOCATE>"
         "$<$<BOOL:${HAVE_PREAD}>:HAVE_PREAD>"
