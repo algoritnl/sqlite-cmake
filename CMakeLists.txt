@@ -61,6 +61,7 @@ option(SQLITE_OMIT_JSON "Omit the JSON SQL functions." OFF)
 option(SQLITE_OMIT_LOAD_EXTENSION "Omit the extension loading mechanism." OFF)
 option(SQLITE_OMIT_PROGRESS_CALLBACK "Omit the capability to issue progress callbacks." OFF)
 option(SQLITE_OMIT_SHARED_CACHE "Omit support for shared-cache mode." OFF)
+option(SQLITE_STRICT_SUBTYPE "This option helps to identify problems with application-defined SQL functions." ON)
 option(SQLITE_USE_ALLOCA "Use alloca for memory allocations if possible." OFF)
 
 multiple_choice(SQLITE_DEFAULT_MEMSTATUS HELP "Enable the SQLITE_CONFIG_MEMSTATUS features by default." VALID_VALUES 0 1 DEFAULT 1 DEFAULT_ON_ERROR)
@@ -244,6 +245,7 @@ target_compile_definitions(
         "$<$<BOOL:${SQLITE_OMIT_LOAD_EXTENSION}>:SQLITE_OMIT_LOAD_EXTENSION>"
         "$<$<BOOL:${SQLITE_OMIT_PROGRESS_CALLBACK}>:SQLITE_OMIT_PROGRESS_CALLBACK>"
         "$<$<BOOL:${SQLITE_OMIT_SHARED_CACHE}>:SQLITE_OMIT_SHARED_CACHE>"
+        "$<$<BOOL:${SQLITE_STRICT_SUBTYPE}>:SQLITE_STRICT_SUBTYPE=1>"
         "$<$<BOOL:${SQLITE_USE_ALLOCA}>:SQLITE_USE_ALLOCA>"
         "$<$<BOOL:${HAVE_INTTYPES_H}>:HAVE_INTTYPES_H>"
         "$<$<BOOL:${HAVE_STDINT_H}>:HAVE_STDINT_H>"
