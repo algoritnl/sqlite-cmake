@@ -35,6 +35,7 @@ include("${CMAKE_CURRENT_LIST_DIR}/cmake/MultipleChoice.cmake")
 # gersemi: off
 option(SQLITE_BUILD_SHELL "Build the SQLite3 interactive shell." ${SQLite3_IS_TOP_LEVEL})
 option(SQLITE_ENABLE_API_ARMOR "This option activates extra code that attempts to detect misuse of the SQLite API." OFF)
+option(SQLITE_ENABLE_CARRAY "Enable the carray() extension." OFF)
 option(SQLITE_ENABLE_COLUMN_METADATA "Enable some extra APIs that are required by some common systems, including Ruby-on-Rails." OFF)
 option(SQLITE_ENABLE_DBSTAT_VTAB "This option enables the dbstat virtual table." OFF)
 option(SQLITE_ENABLE_EXPLAIN_COMMENTS "This option adds extra logic to SQLite that inserts comment text into the output of EXPLAIN." OFF)
@@ -46,6 +47,7 @@ option(SQLITE_ENABLE_GEOPOLY "Enable the Geopoly extension." OFF)
 option(SQLITE_ENABLE_ICU "Enable the ICU (International Components for Unicode) extension." OFF)
 option(SQLITE_ENABLE_MATH_FUNCTIONS "Enable the built-in SQL math functions." ON)
 option(SQLITE_ENABLE_NORMALIZE "Enable the sqlite3_normalized_sql() API." OFF)
+option(SQLITE_ENABLE_PERCENTILE "Enable the percentile extension." OFF)
 option(SQLITE_ENABLE_PREUPDATE_HOOK "Enable the pre-update hook feature." OFF)
 option(SQLITE_ENABLE_RBU "Enable the code that implements the RBU extension." OFF)
 option(SQLITE_ENABLE_RTREE "This option causes SQLite to include support for the R*Tree index extension." OFF)
@@ -219,6 +221,7 @@ target_compile_definitions(
         "$<$<NOT:$<STREQUAL:${SQLITE_MAX_ALLOCATION_SIZE},-1>>:SQLITE_MAX_ALLOCATION_SIZE=${SQLITE_MAX_ALLOCATION_SIZE}>"
         "$<$<NOT:$<STREQUAL:${SQLITE_MAX_EXPR_DEPTH},-1>>:SQLITE_MAX_EXPR_DEPTH=${SQLITE_MAX_EXPR_DEPTH}>"
         "$<$<BOOL:${SQLITE_ENABLE_API_ARMOR}>:SQLITE_ENABLE_API_ARMOR>"
+        "$<$<BOOL:${SQLITE_ENABLE_CARRAY}>:SQLITE_ENABLE_CARRAY>"
         "$<$<BOOL:${SQLITE_ENABLE_COLUMN_METADATA}>:SQLITE_ENABLE_COLUMN_METADATA>"
         "$<$<BOOL:${SQLITE_ENABLE_DBSTAT_VTAB}>:SQLITE_ENABLE_DBSTAT_VTAB>"
         "$<$<BOOL:${SQLITE_ENABLE_EXPLAIN_COMMENTS}>:SQLITE_ENABLE_EXPLAIN_COMMENTS>"
@@ -230,6 +233,7 @@ target_compile_definitions(
         "$<$<BOOL:${SQLITE_ENABLE_ICU}>:SQLITE_ENABLE_ICU>"
         "$<$<BOOL:${SQLITE_ENABLE_MATH_FUNCTIONS}>:SQLITE_ENABLE_MATH_FUNCTIONS>"
         "$<$<BOOL:${SQLITE_ENABLE_NORMALIZE}>:SQLITE_ENABLE_NORMALIZE>"
+        "$<$<BOOL:${SQLITE_ENABLE_PERCENTILE}>:SQLITE_ENABLE_PERCENTILE>"
         "$<$<BOOL:${SQLITE_ENABLE_PREUPDATE_HOOK}>:SQLITE_ENABLE_PREUPDATE_HOOK>"
         "$<$<BOOL:${SQLITE_ENABLE_RBU}>:SQLITE_ENABLE_RBU>"
         "$<$<BOOL:${SQLITE_ENABLE_RTREE}>:SQLITE_ENABLE_RTREE>"
@@ -311,6 +315,7 @@ if(SQLITE_BUILD_SHELL)
     target_compile_definitions(
         sqlite3.shell
         PRIVATE
+            "$<$<BOOL:${SQLITE_ENABLE_CARRAY}>:SQLITE_ENABLE_CARRAY>"
             "$<$<BOOL:${SQLITE_ENABLE_NORMALIZE}>:SQLITE_ENABLE_NORMALIZE>"
             "$<$<BOOL:${SQLITE_ENABLE_SESSION}>:SQLITE_ENABLE_SESSION>"
             "$<$<BOOL:${SQLITE_OMIT_DESERIALIZE}>:SQLITE_OMIT_DESERIALIZE>"
